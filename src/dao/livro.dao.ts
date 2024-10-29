@@ -6,7 +6,6 @@ export class LivroDao{
 
     public async salvarLivro(livro: Livro){
         try{
-    
             await con.query("INSERT INTO LIVRO (id, titulo, autor, quantidade) VALUES(?,?,?,?)", [livro.props.id, livro.props.titulo, livro.props.autor, livro.props.quantidade])
         }catch(erro){
             console.log("Erro ao gravar livro", erro)
@@ -28,6 +27,26 @@ export class LivroDao{
         }
     }
 
+    public async deletarlivro(livro: { id: String}): Promise<void>{
+        const { id } = livro;
+        try {
+            await con.query("DELETE FROM LIVRO WHERE id = ?", [id])
+        } catch (error) {
+            console.log("Erro ao deletar livro", error)
+            throw error
+        }
+    }
 
+    public async atualizarLivro(livro: Livro): Promise<void>{
+        try {
+            await con.query("UPDATE LIVRO SET titulo = ?, autor = ?, WHERE id = ?",
+                [livro.props.titulo, livro.props.autor, livro.props.id])
+
+            console.log(`Livro com id ${livro.props.id} foi atualizado com sucesso.`);
+        } catch (error) {
+            console.log("Erro ao deletar livro", error)
+            throw error
+        }
+    }
 }
 

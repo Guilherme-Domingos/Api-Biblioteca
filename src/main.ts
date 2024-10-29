@@ -14,6 +14,10 @@ app.get("/livro", (req, res)=>{
     livroControle.listarLivro(res)
 })
 
+app.delete("/livro/id", (req, res)=>{
+    livroControle.deletarLivro(req, res)
+})
+
 app.listen(3000, ()=>{
     console.log("serviço http rodando")
 })

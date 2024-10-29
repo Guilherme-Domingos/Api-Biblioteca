@@ -25,4 +25,25 @@ export class LivroControle{
             console.log("Erro ao gravar livro", erro)
         }
     }
+
+    public async deletarLivro(req: Request, res: Response){
+        const { id } = req.params
+        try {
+            await this.livroDao.deletarlivro({id})
+            res.status(200).send(`Livro com id ${id} foi deletado com sucesso.`);
+        } catch (error) {
+            console.log("Erro ao gravar livro", error)
+        }
+    }
+
+    public async atualizarLivro(req: Request, res: Response){
+        const { titulo, autor } = req.body
+        const livro : Livro = Livro.build(titulo, autor)
+        try {
+            await this.livroDao.atualizarLivro(livro)
+            res.status(200).send(`Livro atualizado com sucesso!`);
+        } catch (error) {
+            console.log("Erro ao gravar livro", error)
+        }
+    }
 }
