@@ -6,17 +6,31 @@ const livroControle = new LivroControle(new LivroDao())
 
 const app = express()
 
+// Salvar Livros
 app.post("/livro", (req, res)=>{
     livroControle.salvarLivro(req, res)
 })
 
+// Listar Livros
 app.get("/livro", (req, res)=>{
     livroControle.listarLivro(res)
 })
 
-app.delete("/livro/id", (req, res)=>{
+// Buscar livros
+app.get("/livro/id", (req, res) =>{
+    livroControle.buscarLivro(req, res)
+})
+
+// Deletar livro
+app.delete("/livro/:id", (req, res)=>{
     livroControle.deletarLivro(req, res)
 })
+
+// Atualizar livro
+
+
+
+app.patch("/livro/emprestar/id", )
 
 app.listen(3000, ()=>{
     console.log("serviço http rodando")

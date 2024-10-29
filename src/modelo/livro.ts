@@ -30,4 +30,12 @@ export class Livro{
 
         return new Livro(props)
     }
+
+    public emprestar(): boolean{
+        if(this.props.quantidade>0){
+            this.props.quantidade--
+            return true
+        }
+        return false
+    }
 }

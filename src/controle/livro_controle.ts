@@ -17,20 +17,21 @@ export class LivroControle{
         }
     }
 
-        public  async  listarLivro(res: Response){
+        public async listarLivro(res: Response){
         try{
             const livros = await this.livroDao.listarLivro()
             res.status(200).json({livros: livros}).send()
         }catch(erro){
-            console.log("Erro ao gravar livro", erro)
+            console.log("Erro ao listar livro", erro)
         }
     }
 
     public async deletarLivro(req: Request, res: Response){
-        const { id } = req.params
+        const {id} = req.params
         try {
+            
             await this.livroDao.deletarlivro({id})
-            res.status(200).send(`Livro com id ${id} foi deletado com sucesso.`);
+            res.status(204).json({ message: "Livro deletado"}).send();
         } catch (error) {
             console.log("Erro ao gravar livro", error)
         }
@@ -44,6 +45,16 @@ export class LivroControle{
             res.status(200).send(`Livro atualizado com sucesso!`);
         } catch (error) {
             console.log("Erro ao gravar livro", error)
+        }
+    }
+
+    public async buscarLivro(req: Request, res:Response){
+        const id  = req.params.id
+        try {
+            const livro = await this.livroDao.buscarLivro(id)
+            res.status(200).json({livro: livro?.props}).send()
+        } catch (error) {
+            
         }
     }
 }

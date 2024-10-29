@@ -27,7 +27,7 @@ export class LivroDao{
         }
     }
 
-    public async deletarlivro(livro: { id: String}): Promise<void>{
+    public async deletarlivro(livro: { id: string}): Promise<void>{
         const { id } = livro;
         try {
             await con.query("DELETE FROM LIVRO WHERE id = ?", [id])
@@ -45,6 +45,19 @@ export class LivroDao{
             console.log(`Livro com id ${livro.props.id} foi atualizado com sucesso.`);
         } catch (error) {
             console.log("Erro ao deletar livro", error)
+            throw error
+        }
+    }
+
+    public async buscarLivro(id: string): Promise<Livro | null> {
+        try {
+            const [result] = await con.query<livroProps[] & RowDataPacket[]>('SELECT * FROM livro WHERE id=?', [id])
+
+            const { titulo, autor, quantidade } = result[0]
+            const livro: Livro = Livro.Assemble(id, titulo, autor, quantidade)
+            return livro
+        } catch (error) {
+            console.log("erro ao buscar livro", error)
             throw error
         }
     }
