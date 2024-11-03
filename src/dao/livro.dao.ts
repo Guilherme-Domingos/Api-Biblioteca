@@ -1,4 +1,4 @@
-import { RowDataPacket } from "mysql2"
+import { ResultSetHeader, RowDataPacket } from "mysql2"
 import { Livro, livroProps } from "../modelo/livro"
 import con from "../util/conexao" 
 
@@ -27,16 +27,30 @@ export class LivroDao{
         }
     }
 
-    public async deletarlivro(livro: { id: string}): Promise<void>{
-        const { id } = livro;
-        try {
-            await con.query("DELETE FROM LIVRO WHERE id = ?", [id])
-        } catch (error) {
-            console.log("Erro ao deletar livro", error)
-            throw error
-        }
-    }
+    // public async deletarlivro(livro: { id: string}): Promise<void>{
+    //     const { id } = livro;
+    //     try {
+    //         await con.query("DELETE FROM LIVRO WHERE id = ?", [id])
+    //     } catch (error) {
+    //         console.log("Erro ao deletar livro", error)
+    //         throw error
+    //     }
+    // }
 
+    public async deletarLivro(id: string): Promise<boolean> {
+        try {
+          const [result]: [ResultSetHeader, any] = await con.execute(
+            "DELETE FROM livro WHERE id = ?", 
+            [id]
+          );
+          return result.affectedRows > 0;
+        } catch (error) {
+          console.error("Erro ao deletar o livro.", error);
+          return false;
+        }
+      }
+
+      
     public async atualizarLivro(livro: Livro): Promise<void>{
         try {
             await con.query("UPDATE LIVRO SET titulo = ?, autor = ?, WHERE id = ?",

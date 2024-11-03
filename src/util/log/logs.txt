@@ -1,0 +1,6 @@
+[INFO] - 2024-11-03T18:43:45.678Z: Livro salvo no banco
+[INFO] - 2024-11-03T18:44:04.533Z: Livro salvo no banco
+[INFO] - 2024-11-03T18:45:07.632Z: Livro excluido do banco
+[ERROR] - 2024-11-03T18:45:07.731Z: erro ao excluir livro
+[INFO] - 2024-11-03T18:54:28.615Z: Listagem feita do banco
+[INFO] - 2024-11-03T18:55:11.643Z: Livro salvo no banco

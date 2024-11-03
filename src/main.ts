@@ -5,6 +5,7 @@ import { LivroDao } from "./dao/livro.dao"
 const livroControle = new LivroControle(new LivroDao())
 
 const app = express()
+app.use(express.json())
 
 // Salvar Livros
 app.post("/livro", (req, res)=>{
@@ -23,7 +24,7 @@ app.get("/livro/id", (req, res) =>{
 
 // Deletar livro
 app.delete("/livro/:id", (req, res)=>{
-    livroControle.deletarLivro(req, res)
+    livroControle.deletar(req, res)
 })
 
 // Atualizar livro
