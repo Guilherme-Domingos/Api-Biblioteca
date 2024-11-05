@@ -24,7 +24,7 @@ export class LivroControle{
         }
     }
 
-        public async listarLivro(res: Response){
+        public async listarLivro(req: Request, res: Response){
         try{
             const livros = await this.livroDao.listarLivro()
             res.status(200).json({livros: livros}).send()

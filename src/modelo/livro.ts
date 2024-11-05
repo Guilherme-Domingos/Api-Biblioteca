@@ -38,4 +38,20 @@ export class Livro{
         }
         return false
     }
+
+    public get id(){
+        return this.props.id
+    }
+
+    public get titulo(){
+        return this.props.titulo
+    }
+
+    public get autor(){
+        return this.props.autor
+    }
+
+    public get quantidade(){
+        return this.props.quantidade
+    }
 }
